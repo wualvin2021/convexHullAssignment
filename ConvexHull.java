@@ -33,16 +33,14 @@ class Point implements Comparable<Point> {
  */
 public class ConvexHull {
 
-    // Orientation test: >0 left turn, <0 right turn, 0 collinear
+    // Orientation test: returns positive for counter-clockwise,
     public static int orientation(Point a, Point b, Point c) {
-        return (b.x - a.x) * (c.y - a.y) -
-                (b.y - a.y) * (c.x - a.x);
+        return (b.y - a.y) * (c.x - b.x) - (b.x - a.x) * (c.y - b.y);
     }
 
-    // Distance squared (no need for sqrt)
+    // Distance squared between two points
     public static int distSq(Point a, Point b) {
-        return (a.x - b.x) * (a.x - b.x) +
-                (a.y - b.y) * (a.y - b.y);
+        return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
     }
 
     // Graham Scan main method
