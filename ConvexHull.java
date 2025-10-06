@@ -2,7 +2,8 @@ import java.util.*;
 
 /*
  * Convex Hull implementation using Graham's algorithm.
- * The algorithm finds the convex hull of a set of 2D points in O(n log n) time.
+ * Point class represents a point in 2D space with x and y coordinates.
+ * The algorithm finds the convex hull of a set of 2D points.
  */
 class Point implements Comparable<Point> {
     int x, y;
@@ -25,7 +26,7 @@ class Point implements Comparable<Point> {
     }
 }
 /*
- * Implementation of Graham's scan algorithm to find the convex hull of a set of points.
+ * Implementation of Graham's algorithm to find the convex hull of a set of points.
  * The algorithm sorts the points by polar angle with respect to a pivot point,
  * then constructs the convex hull using a stack to maintain the vertices of the hull.
  * The orientation test is used to determine the turn direction between three points.
@@ -61,11 +62,12 @@ public class ConvexHull {
             return -orient; // counter-clockwise first
         });
 
-        // Step 3: build hull using stack
+        // Build hull using stack
         Stack<Point> hull = new Stack<>();
         hull.push(points.get(0));
         hull.push(points.get(1));
 
+        // Process remaining points
         for (int i = 2; i < points.size(); i++) {
             Point top = hull.pop();
             while (!hull.isEmpty() && orientation(hull.peek(), top, points.get(i)) <= 0) {
@@ -78,6 +80,7 @@ public class ConvexHull {
         return new ArrayList<>(hull);
     }
 
+    // Test the Convex Hull implementation
     public static void main(String[] args) {
         List<Point> pts = Arrays.asList(
                 new Point(0, 3), new Point(2, 2),
